@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/complex_number_tst.dir/Formula-test.cpp.o CMakeFiles/complex_number_tst.dir/main.cpp.o  -o complex_number_tst  ../libcomplex_number_lib.a ../lib/libgtestd.a -lpthread 

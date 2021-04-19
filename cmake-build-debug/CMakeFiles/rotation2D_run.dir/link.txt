@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -rdynamic CMakeFiles/rotation2D_run.dir/src/GnuplotDrawings.cpp.o CMakeFiles/rotation2D_run.dir/src/Matrix2x2.cpp.o CMakeFiles/rotation2D_run.dir/src/Reactangle.cpp.o CMakeFiles/rotation2D_run.dir/src/Vector.cpp.o CMakeFiles/rotation2D_run.dir/src/main.cpp.o -o rotation2D_run  lib/GNUPlot/libGNUPlot_lib.a 
