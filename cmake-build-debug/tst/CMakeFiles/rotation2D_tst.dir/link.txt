@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -rdynamic CMakeFiles/rotation2D_tst.dir/Formula-test.cpp.o CMakeFiles/rotation2D_tst.dir/main.cpp.o -o rotation2D_tst  ../librotation2D_lib.a ../lib/libgtestd.a -lpthread 

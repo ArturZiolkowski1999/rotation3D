@@ -1,0 +1,10 @@
+/build/*
+.vscode*
+*.exe
+*.out
+*.x
+*.lib
+*.mod
+*.d
+*.obj
+*.o
