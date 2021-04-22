@@ -14,16 +14,28 @@ public:
     Matrix();
     Matrix(double degree, char axis);
 
-    friend bool operator==(const Matrix<T, dimension> &matrix1, const Matrix<T, dimension> &matrix2);
-    friend Vector<double, dimension> operator*(const Matrix<T, dimension> &matrix, Vector<double,dimension> &vec);
-    double &operator()(int row, int column);
-    const double &operator()(int row, int column) const;
+    template<typename T1, unsigned int dimension1>
+    friend bool operator==(const Matrix<T1, dimension1> &matrix1, const Matrix<T1, dimension1> &matrix2);
+
+    template<typename T1, unsigned int dimension1>
+    friend Vector<T1,dimension1> operator*(const Matrix<T1, dimension1> &matrix, Vector<T1, dimension1> &vec);
+
+    T &operator()(int row, int column);
+    const T &operator()(int row, int column) const;
 };
 
 
 template <typename T, unsigned int dimension>
 Matrix<T, dimension>::Matrix() {
-    this = Matrix<T, dimension>(0, 'z');
+    this->matrix[0][0] = 1;
+    this->matrix[0][1] = 0;
+    if(dimension > 2) this->matrix[0][2] = 0;
+    this->matrix[1][0] = 0;
+    this->matrix[1][1] = 1;
+    if(dimension > 2) this->matrix[1][2] = 0;
+    if(dimension > 2) this->matrix[2][0] = 0;
+    if(dimension > 2) this->matrix[2][1] = 0;
+    if(dimension > 2) this->matrix[2][2] = 1;
 }
 
 template <typename T, unsigned int dimension>
@@ -125,7 +137,7 @@ Vector<T,dimension> operator*(const Matrix<T, dimension> &matrix, Vector<T, dime
 }
 
 template <typename T, unsigned int dimension>
-double &Matrix<T,dimension>::operator()(int row, int column) {
+T &Matrix<T,dimension>::operator()(int row, int column) {
     if(row >= dimension || row < 0 || column >= dimension || column < 0){
         throw std::invalid_argument("index out of range");
     }
@@ -133,8 +145,8 @@ double &Matrix<T,dimension>::operator()(int row, int column) {
 }
 
 template <typename T, unsigned int dimension>
-const double &Matrix<T, dimension>::operator()(int row, int column) const {
-    if(row >= MATRIX_DIM || row < 0 || column >= MATRIX_DIM || column < 0){
+const T &Matrix<T, dimension>::operator()(int row, int column) const {
+    if(row >= dimension || row < 0 || column >= dimension || column < 0){
         throw std::invalid_argument("index out of range");
     }
     return matrix[row][column];
