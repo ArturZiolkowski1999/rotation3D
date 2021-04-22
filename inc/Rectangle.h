@@ -9,7 +9,7 @@
 #include <iostream>
 #include <utility>
 #include <float.h>
-#include "Matrix3x3.h"
+#include "Matrix.h"
 #include "Constants.h"
 #include "Vector.h"
 

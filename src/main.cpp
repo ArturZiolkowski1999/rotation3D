@@ -2,7 +2,7 @@
 #include <fstream>
 #include <lacze_do_gnuplota.hh>
 #include <utility>
-#include "Matrix3x3.h"
+#include "Matrix.h"
 #include "Rectangle.h"
 #include "Vector.h"
 #include "GnuplotDrawings.h"

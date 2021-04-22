@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "Matrix3x3.h"
+#include "Matrix.h"
 #include <iostream>
 #include <utility>
 #include "Rectangle.h"
@@ -127,8 +127,8 @@ TEST (Vector, GetLength) {
 }
 
 TEST (Matrix, EmptyConstructor) {
-    Matrix3x3 A = Matrix3x3();
-    Matrix3x3 B = Matrix3x3();
+    Matrix A = Matrix();
+    Matrix B = Matrix();
 
     B.setMatrix(0,0,0,0);
     EXPECT_EQ(A, B);
@@ -136,11 +136,11 @@ TEST (Matrix, EmptyConstructor) {
 
 TEST (Matrix, Constructor) {
 
-    Matrix3x3 A = Matrix3x3(90);
-    Matrix3x3 B = Matrix3x3();
+    Matrix A = Matrix3x3(90);
+    Matrix B = Matrix();
 
-    Matrix3x3 C = Matrix3x3(0);
-    Matrix3x3 D = Matrix3x3();
+    Matrix C = Matrix3x3(0);
+    Matrix D = Matrix();
 
     B.setMatrix(cos(M_PI/2),-sin(M_PI/2),sin(M_PI),cos(M_PI/2));
     D.setMatrix(cos(0),-sin(0),sin(0),cos(0));
@@ -151,7 +151,7 @@ TEST (Matrix, Constructor) {
 
 TEST (Matrix, MultiplicationMatrixVector) {
 
-    Matrix3x3 A = Matrix3x3();
+    Matrix A = Matrix();
     Vector vec = Vector(1,1);
     Vector result = Vector();
 
@@ -163,7 +163,7 @@ TEST (Matrix, MultiplicationMatrixVector) {
 
 TEST (Matrix, MultiplicationUnitByMatrixVector) {
 
-    Matrix3x3 A = Matrix3x3(0);
+    Matrix A = Matrix3x3(0);
     Vector vec = Vector(1,2);
     Vector result = Vector();
     result = A*vec;
@@ -173,8 +173,8 @@ TEST (Matrix, MultiplicationUnitByMatrixVector) {
 
 TEST (Matrix, Indexing) {
 
-    Matrix3x3 A = Matrix3x3();
-    Matrix3x3 B = Matrix3x3();
+    Matrix A = Matrix();
+    Matrix B = Matrix();
     Vector vec = Vector(1,1);
     Vector result = Vector();
 
@@ -191,7 +191,7 @@ TEST (Matrix, Indexing) {
 
 TEST (Matrix, FailIndexing) {
 
-    Matrix3x3 A = Matrix3x3();
+    Matrix A = Matrix();
     Vector vec = Vector(1,1);
     Vector result = Vector();
 

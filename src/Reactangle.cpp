@@ -85,7 +85,7 @@ void Rectangle::translationByVector(Vector &Vec){
 }
 
 void Rectangle::rotationByDegrees(double degree){
-    Matrix3x3 rotation = Matrix3x3(degree);
+    Matrix rotation = Matrix3x3(degree);
     this->centerOfMass = rotation * (this->centerOfMass);
     this->vertices[0] = rotation * (this->vertices[0]);
     this->vertices[1] = rotation * (this->vertices[1]);
