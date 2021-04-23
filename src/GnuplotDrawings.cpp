@@ -22,7 +22,7 @@
 //    GNU.UstawZakresY((this->YRange[0]),(this->YRange[1]));
 //}
 //
-//void GnuplotDrawings::drawRectangle(Rectangle &Rec){
+//void GnuplotDrawings::drawRectangle(Cuboid &Rec){
 //    std::ofstream os;
 //    os.open(this->fileName);
 //    if(!os){
@@ -49,8 +49,8 @@
 //    os.close();
 //}
 //
-//void GnuplotDrawings::animateRotateRectangle(Rectangle &Rec, double &degree) {
-//    Rectangle animateRec = Rec;
+//void GnuplotDrawings::animateRotateRectangle(Cuboid &Rec, double &degree) {
+//    Cuboid animateRec = Rec;
 //    double singleDegree = 0;
 //    while (std::abs(singleDegree) < std::abs(degree)){
 //        singleDegree += 2;
@@ -66,8 +66,8 @@
 //    drawRectangle(Rec);
 //}
 //
-//void GnuplotDrawings::animateTranslateRectangle(Rectangle &Rec, Vector &translation) {
-//    Rectangle animateRec = Rec;
+//void GnuplotDrawings::animateTranslateRectangle(Cuboid &Rec, Vector &translation) {
+//    Cuboid animateRec = Rec;
 //    Vector animateTranslation = translation/translation.getLength();
 //    Vector unityTranslation = translation/translation.getLength();
 //    unityTranslation = unityTranslation/RESOLUTION;

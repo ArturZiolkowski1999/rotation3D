@@ -12,6 +12,7 @@ const int VECTOR_PRECISION = 10;
 const int VECTOR_DIM = 3;
 const int MATRIX_DIM = 3;
 const int VERTICES_NUMBER = 8;
+const int SIDES_NUMBER = 12;
 const double MIN_THRESHOLD = 0.000001;
 
 #endif //ROTATION2D_CONSTANS_H

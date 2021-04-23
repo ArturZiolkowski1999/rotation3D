@@ -3,19 +3,19 @@
 #include <lacze_do_gnuplota.hh>
 #include <utility>
 #include "Matrix.h"
-#include "cuboid.h"
+#include "Cuboid.h"
 #include "Vector.h"
 #include "GnuplotDrawings.h"
 
 void menuDisplay();
 
 int main(int argc, char** argv) {
-    /* Initialize Rectangle and translation vector and sides pair*/
+    /* Initialize Cuboid and translation vector and sides pair*/
 //    Vector ver1 = Vector(1,1);
 //    Vector ver2 = Vector(11,1);
 //    Vector ver3 = Vector(11,6);
 //    Vector ver4 = Vector(1,6);
-//    Rectangle rec = Rectangle(ver1, ver2, ver3, ver4);
+//    Rectangle rec = Cuboid(ver1, ver2, ver3, ver4);
 //    Vector translation;
 //    std::pair <double, double> sides;
 //    /* Initialize "Lacze do gnuplota" to work with */

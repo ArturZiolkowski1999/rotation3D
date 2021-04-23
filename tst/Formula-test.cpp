@@ -2,7 +2,7 @@
 #include "Matrix.h"
 #include <iostream>
 #include <utility>
-#include "cuboid.h"
+#include "Cuboid.h"
 #include "Constants.h"
 #include "Vector.h"
 
@@ -216,47 +216,47 @@ TEST (Matrix, FailIndexing) {
     EXPECT_THROW(A(2,4), std::invalid_argument);
 }
 //
-//TEST (Rectangle, EmptyConstructor) {
+//TEST (Cuboid, EmptyConstructor) {
 //
-//    Rectangle Adam = Rectangle();
-//    Rectangle Ewa = Rectangle();
+//    Rectangle Adam = Cuboid();
+//    Rectangle Ewa = Cuboid();
 //
 //    Vector Vec0 = Vector();
 //    Vector Vec1 = Vector();
 //    Vector Vec2 = Vector();
 //    Vector Vec3 = Vector();
 //    Vector Vec4 = Vector();
-//    Ewa.setRectangle(Vec0, Vec1, Vec2, Vec3, Vec4);
+//    Ewa.setCuboid(Vec0, Vec1, Vec2, Vec3, Vec4);
 //
 //    EXPECT_EQ(Adam, Ewa);
 //}
 //
-//TEST (Rectangle, ConstructorWithVerticesInOrder) {
+//TEST (Cuboid, ConstructorWithVerticesInOrder) {
 //
 //    Vector Ver1 = Vector(1,3);
 //    Vector Ver2 = Vector(3,3);
 //    Vector Ver3 = Vector(3,1);
 //    Vector Ver4 = Vector(1,1);
 //
-//    Rectangle Adam = Rectangle(Ver1, Ver2, Ver3, Ver4);
-//    Rectangle Ewa = Rectangle();
+//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
+//    Cuboid Ewa = Rectangle();
 //
 //    Vector center = Vector(2,2);
 //
-//    Ewa.setRectangle(center, Ver1, Ver2, Ver3, Ver4);
+//    Ewa.setCuboid(center, Ver1, Ver2, Ver3, Ver4);
 //
 //    EXPECT_EQ(Adam, Ewa);
 //}
 //
-//TEST (Rectangle, ConstructorWithMixedUpVerticesInArguments) {
+//TEST (Cuboid, ConstructorWithMixedUpVerticesInArguments) {
 //
 //    Vector Ver1 = Vector(1,3);
 //    Vector Ver2 = Vector(3,3);
 //    Vector Ver3 = Vector(3,1);
 //    Vector Ver4 = Vector(1,1);
 //
-//    Rectangle Adam = Rectangle(Ver2, Ver1, Ver4, Ver3);
-//    Rectangle Ewa = Rectangle();
+//    Cuboid Adam = Rectangle(Ver2, Ver1, Ver4, Ver3);
+//    Rectangle Ewa = Cuboid();
 //
 //    Vector center = Vector(2,2);
 //
@@ -264,24 +264,24 @@ TEST (Matrix, FailIndexing) {
 //    Vector Vec2 = Vector(3,3);
 //    Vector Vec3 = Vector(3,1);
 //    Vector Vec4 = Vector(1,1);
-//    Ewa.setRectangle(center, Vec1, Vec2, Vec3, Vec4);
+//    Ewa.setCuboid(center, Vec1, Vec2, Vec3, Vec4);
 //
 //    EXPECT_EQ(Adam, Ewa);
 //}
 //
-//TEST (Rectangle, FailConstructor) {
+//TEST (Cuboid, FailConstructor) {
 //
 //    Vector Ver1 = Vector(1,3);
 //    Vector Ver2 = Vector(3,3);
 //    Vector Ver3 = Vector(3,1);
 //    Vector Ver4 = Vector(1,1);
 //
-//    Rectangle Adam;
+//    Cuboid Adam;
 //
-//    EXPECT_THROW(Adam = Rectangle(Ver1, Ver1, Ver4, Ver3), std::invalid_argument);
+//    EXPECT_THROW(Adam = Cuboid(Ver1, Ver1, Ver4, Ver3), std::invalid_argument);
 //}
 //
-//TEST (Rectangle, TranslationByWector) {
+//TEST (Cuboid, TranslationByWector) {
 //
 //    Vector Ver1 = Vector(1,3);
 //    Vector Ver2 = Vector(3,3);
@@ -289,8 +289,8 @@ TEST (Matrix, FailIndexing) {
 //    Vector Ver4 = Vector(1,1);
 //    Vector translation = Vector(1,1);
 //
-//    Rectangle Adam = Rectangle(Ver1, Ver2, Ver3, Ver4);
-//    Rectangle Ewa = Rectangle();
+//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
+//    Rectangle Ewa = Cuboid();
 //    Adam.translationByVector(translation);
 //    Vector center = Vector(3,3);
 //    Vector Vec1 = Vector(2,4);
@@ -298,12 +298,12 @@ TEST (Matrix, FailIndexing) {
 //    Vector Vec3 = Vector(4,2);
 //    Vector Vec4 = Vector(2,2);
 //
-//    Ewa.setRectangle(center, Vec1, Vec2, Vec3, Vec4);
+//    Ewa.setCuboid(center, Vec1, Vec2, Vec3, Vec4);
 //
 //    EXPECT_EQ(Adam, Ewa);
 //}
 //
-//TEST (Rectangle, RotationByDegrees) {
+//TEST (Cuboid, RotationByDegrees) {
 //
 //    Vector Ver1 = Vector(1, 3);
 //    Vector Ver2 = Vector(3, 3);
@@ -311,8 +311,8 @@ TEST (Matrix, FailIndexing) {
 //    Vector Ver4 = Vector(1, 1);
 //    Vector translation = Vector(1, 1);
 //
-//    Rectangle Adam = Rectangle(Ver1, Ver2, Ver3, Ver4);
-//    Rectangle Ewa = Rectangle();
+//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
+//    Cuboid Ewa = Rectangle();
 //    Adam.rotationByDegrees(90);
 //
 //    Vector center = Vector(-2, 2);
@@ -321,12 +321,12 @@ TEST (Matrix, FailIndexing) {
 //    Vector Vec3 = Vector(-1, 3);
 //    Vector Vec4 = Vector(-1, 1);
 //
-//    Ewa.setRectangle(center, Vec1, Vec2, Vec3, Vec4);
+//    Ewa.setCuboid(center, Vec1, Vec2, Vec3, Vec4);
 //
 //    EXPECT_EQ(Adam, Ewa);
 //}
 //
-//TEST (Rectangle, RectangleOstream) {
+//TEST (Cuboid, RectangleOstream) {
 //
 //    std::stringstream ost;
 //    Vector Ver1 = Vector(1, 3);
@@ -334,13 +334,13 @@ TEST (Matrix, FailIndexing) {
 //    Vector Ver3 = Vector(3, 1);
 //    Vector Ver4 = Vector(1, 1);
 //
-//    Rectangle Adam = Rectangle(Ver1, Ver2, Ver3, Ver4);
+//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
 //    ost << Adam;
 //    /* rectangle in cout give 10 decimal point fixed precision */
 //    EXPECT_EQ("1 3\n3 3\n3 1\n1 1\n", ost.str());
 //}
 //
-//TEST (Rectangle, GetSidesLength) {
+//TEST (Cuboid, GetSidesLength) {
 //
 //    std::stringstream ost;
 //    Vector Ver1 = Vector(1, 3);
@@ -348,7 +348,7 @@ TEST (Matrix, FailIndexing) {
 //    Vector Ver3 = Vector(1, 1);
 //    Vector Ver4 = Vector(3, 1);
 //
-//    Rectangle Adam = Rectangle(Ver1, Ver2, Ver3, Ver4);
+//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
 //    std::pair<double,double> sides = Adam.getSidesLength(Ver1, Ver2, Ver3, Ver4);
 //    double shorterSide = sides.first;
 //    double longerSide = sides.second;
@@ -357,7 +357,7 @@ TEST (Matrix, FailIndexing) {
 //    EXPECT_EQ(longerSide, 2);
 //}
 //
-//TEST (Rectangle, Indexing) {
+//TEST (Cuboid, Indexing) {
 //
 //std::stringstream ost;
 //Vector Ver1 = Vector(1, 3);
@@ -365,7 +365,7 @@ TEST (Matrix, FailIndexing) {
 //Vector Ver3 = Vector(1, 1);
 //Vector Ver4 = Vector(3, 1);
 //
-//Rectangle Adam = Rectangle(Ver1, Ver2, Ver3, Ver4);
+//Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
 //
 //
 //EXPECT_EQ(Adam[0], Ver1);

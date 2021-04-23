@@ -5,7 +5,7 @@
 #ifndef ROTATION2D_GNUPLOTDRAWINGS_H
 #define ROTATION2D_GNUPLOTDRAWINGS_H
 #include <unistd.h>
-#include "cuboid.h"
+#include "Cuboid.h"
 #include <lacze_do_gnuplota.hh>
 #include <fstream>
 
@@ -19,10 +19,10 @@
 //public:
 //    GnuplotDrawings();
 //    GnuplotDrawings(std::string _fileName, double _XRange[2], double _YRange[2]);
-//    void drawRectangle(Rectangle &Rec);
+//    void drawRectangle(Cuboid &Rec);
 //    void drawVector(Vector &Vec);
-//    void animateRotateRectangle(Rectangle &Rec, double &degree);
-//    void animateTranslateRectangle(Rectangle &Rec, Vector &translation);
+//    void animateRotateRectangle(Cuboid &Rec, double &degree);
+//    void animateTranslateRectangle(Cuboid &Rec, Vector &translation);
 //};
 
 #endif //ROTATION2D_GNUPLOTDRAWINGS_H
