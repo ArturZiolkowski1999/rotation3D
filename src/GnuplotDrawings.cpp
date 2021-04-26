@@ -54,7 +54,7 @@ void GnuplotDrawings::drawVector(Vector<double, 3> &Vec){
     os.close();
 }
 
-void GnuplotDrawings::animateRotateRectangle(Cuboid<double> &cub, double &degree, char axis) {
+void GnuplotDrawings::animateRotateCuboid(Cuboid<double> &cub, double &degree, char &axis) {
     Cuboid<double> animateCub = cub;
     Matrix<double, 3> rotMatrix = Matrix<double, 3>();
     double singleDegree = 0;

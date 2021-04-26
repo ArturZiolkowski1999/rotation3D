@@ -193,15 +193,17 @@ void Cuboid<T>::calculateSidesLength(){
 
 template<typename T>
 std::ostream &operator<<(std::ostream &ost, Cuboid<T> &cub) {
+    ost << cub.vertices[0]; ost << cub.vertices[1];
+    ost << cub.vertices[2]; ost << cub.vertices[3];
+    ost << cub.vertices[3]; ost << cub.vertices[0];
+    ost << cub.vertices[4]; ost << cub.vertices[5];
+    ost << cub.vertices[1]; ost << cub.vertices[5];
+    ost << cub.vertices[5]; ost << cub.vertices[6];
+    ost << cub.vertices[2]; ost << cub.vertices[6];
+    ost << cub.vertices[7]; ost << cub.vertices[3];
+    ost << cub.vertices[7]; ost << cub.vertices[4];
     ost << cub.vertices[0];
-    ost << cub.vertices[1];
-    ost << cub.vertices[2];
-    ost << cub.vertices[3];
-    ost << cub.vertices[4];
-    ost << cub.vertices[5];
-    ost << cub.vertices[6];
-    ost << cub.vertices[7];
-    ost << cub.vertices[0];
+
     return ost;
 }
 

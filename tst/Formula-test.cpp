@@ -341,7 +341,8 @@ TEST (Cuboid, Ostream) {
     Cuboid<double> Adam = Cuboid<double>(vertices);
     ost << Adam;
     /* cuboid in cout give 10 decimal point fixed precision */
-    EXPECT_EQ("0 0 1\n5 0 1\n5 0 4\n0 0 4\n0 7 1\n5 7 1\n5 7 4\n0 7 4\n0 0 1\n", ost.str());
+    EXPECT_EQ("0 0 1\n5 0 1\n5 0 4\n0 0 4\n0 0 4\n0 0 1\n0 7 1\n5 7 1\n5 0 1\n5 7 1\n5 7 1\n5 7 4\n5 0 4\n5 7 4\n0 7 "
+              "4\n0 0 4\n0 7 4\n0 7 1\n0 0 1\n", ost.str());
 }
 
 TEST (Cuboid, GetSidesLength) {

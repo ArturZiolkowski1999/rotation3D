@@ -7,11 +7,13 @@
 #include "Vector.h"
 #include "GnuplotDrawings.h"
 #define Vector Vector<double, 3>
+#define Matrix Matrix<double, 3>
 
 void menuDisplay();
+void getRotationMatrix(Cuboid<double> &cub, Matrix &rotMatrix, GnuplotDrawings &gnu);
 
 int main(int argc, char** argv) {
-    /* Initialize Cuboid and translation vector and sides pair*/
+    /* Initialize Cuboid and translation vector and axis*/
     Vector Ver0 = Vector(0,1,1);
     Vector Ver1 = Vector(5,1,1);
     Vector Ver2 = Vector(5,1,4);
@@ -24,13 +26,15 @@ int main(int argc, char** argv) {
 
     Vector vertices[VERTICES_NUMBER] = {Ver0, Ver1, Ver2, Ver3, Ver4, Ver5, Ver6, Ver7};
     Cuboid<double> cub = Cuboid<double>(vertices);
+    char axis;
+    Matrix rotMatrix = Matrix();
 
     Vector translation;
     /* Initialize "Lacze do gnuplota" to work with */
     std ::string file ="../data/data.txt";
-    double XRange[2] = {-10, 10};
-    double YRange[2] = {-10, 10};
-    double ZRange[2] = {-10, 10};
+    double XRange[2] = {-15, 15};
+    double YRange[2] = {-15, 15};
+    double ZRange[2] = {-15, 15};
     GnuplotDrawings gnu = GnuplotDrawings(file, XRange, YRange, ZRange);
     /* Drawing initial rectangle and display menu*/
     menuDisplay();
@@ -47,18 +51,12 @@ int main(int argc, char** argv) {
                 menuDisplay();
                 break;
             case 'o':
-                std::cout << "enter rotation angle by degree:\n";
-                std::cin >> degree;
-                std::cout << "enter amount of rotation:\n";
-                std::cin >> amountOfRotation;
-                degree *= amountOfRotation;
-                gnu.animateRotateRectangle(cub, degree, 'z');
-                std::cout << "You chose: '"<< c << "' (m-menu)\n";
+                getRotationMatrix(cub, rotMatrix, gnu);
+                rotMatrix = Matrix();
                 break;
             case 'p':
                 std::cin >> translation;
                 gnu.animateTranslateRectangle(cub,translation);
-                std::cout << "You chose: '"<< c << "' (m-menu)\n";
                 break;
             case 'w':
                 std::cout << cub;
@@ -67,8 +65,20 @@ int main(int argc, char** argv) {
                 break;
             case 'l':
                 cub.calculateSidesLength();
-                std::cout << "shorter side: " << cub.getSideLength(0) << std::endl;
-                std::cout << "longer side: " << cub.getSideLength(5) << std::endl;
+                std::cout << "first sides: " << cub.getSideLength(0) << std::endl;
+                std::cout << "first sides: " << cub.getSideLength(1) << std::endl;
+                std::cout << "first sides: " << cub.getSideLength(2) << std::endl;
+                std::cout << "first sides: " << cub.getSideLength(3) << std::endl;
+
+                std::cout << "second sides: " << cub.getSideLength(4) << std::endl;
+                std::cout << "second sides: " << cub.getSideLength(5) << std::endl;
+                std::cout << "second sides: " << cub.getSideLength(6) << std::endl;
+                std::cout << "second sides: " << cub.getSideLength(7) << std::endl;
+
+                std::cout << "third sides: " << cub.getSideLength(8) << std::endl;
+                std::cout << "third sides: " << cub.getSideLength(9) << std::endl;
+                std::cout << "third sides: " << cub.getSideLength(10) << std::endl;
+                std::cout << "third sides: " << cub.getSideLength(11) << std::endl;
                 break;
             default:
                 std::cout << "unknown argument, pleas use correct arguments\n";
@@ -89,3 +99,21 @@ void menuDisplay(){
   std::cout << "l - display length of sides\n";
 }
 
+void getRotationMatrix(Cuboid<double> &cub, Matrix &rotMatrix, GnuplotDrawings &gnu){
+    char c;
+    Matrix rot;
+    double degree;
+    while(c != '.'){
+        std::cout << "give axis ann angle in degree\n";
+        if(!(std::cin >> c)){
+            throw std::exception();
+        }
+        if(c == '.') break;
+        if(!(std::cin >> degree)){
+            throw std::exception();
+        }
+        rot = Matrix(degree, c);
+        gnu.animateRotateCuboid(cub, degree, c);
+        rotMatrix = rotMatrix * rot;
+    }
+}

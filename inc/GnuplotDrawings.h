@@ -22,7 +22,7 @@ public:
     GnuplotDrawings(std::string _fileName, double _XRange[2], double _YRange[2], double _ZRange[2]);
     void drawCuboid(Cuboid<double> &cub);
     void drawVector(Vector<double, 3> &Vec);
-    void animateRotateRectangle(Cuboid<double> &Rec, double &degree, char axis);
+    void animateRotateCuboid(Cuboid<double> &cub, double &degree, char &axis);
     void animateTranslateRectangle(Cuboid<double> &cub, Vector<double, 3> &translation);
 };
 
