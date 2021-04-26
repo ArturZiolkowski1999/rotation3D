@@ -1,8 +1,8 @@
 //
 // Created by artur on 3/18/21.
 //
-#ifndef ROTATION2D_VECTOR_H
-#define ROTATION2D_VECTOR_H
+#ifndef ROTATION3D_VECTOR_H
+#define ROTATION3D_VECTOR_H
 #include "Constants.h"
 #include <iostream>
 #include <iomanip>
@@ -33,7 +33,7 @@ public:
     friend Vector<T1, dimension1> operator/(Vector<T1, dimension1> &Vec, const double &Num);
 
     template<typename T1, unsigned int dimension1>
-    friend Vector<T1, dimension1> operator*(Vector<T1, dimension1> &Vec, double &Num);
+    friend Vector<T1, dimension1> operator*(Vector<T1, dimension1> &Vec, const double &Num);
 
     const T &operator[](int index) const;
 
@@ -242,4 +242,6 @@ public:
     }
 
 
-#endif //ROTATION2D_VECTOR_H
+
+
+#endif //ROTATION3D_VECTOR_H

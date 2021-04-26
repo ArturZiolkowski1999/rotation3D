@@ -4,8 +4,8 @@
 
 
 
-#ifndef ROTATION2D_CUBOID_H
-#define ROTATION2D_CUBOID_H
+#ifndef ROTATION3D_CUBOID_H
+#define ROTATION3D_CUBOID_H
 #include <iostream>
 #include <utility>
 #include <float.h>
@@ -19,23 +19,21 @@ private:
 
     Vector<T, 3> vertices[VERTICES_NUMBER];
     T sidesLength[SIDES_NUMBER];
-//    void sortVertices(Vector<T,dimension> *Vec1); // <- you have to specify vertices in correct order now
-
 public:
     Cuboid();
     Cuboid(Vector<T, 3> *ver);
     /* Set all parameters strictly */
     template<typename T1>
     friend bool operator==(const Cuboid<T1> &cub1, const Cuboid<T1> &cub2);
-    void translationByVector(const Vector<T, 3> &Vec);
+    void translationByVector(Vector<T, 3> &Vec);
     void rotationByMatrix(const Matrix<T, 3> &rotMatrix);
 
     const Vector<T, 3> & operator[](int index) const;
     Vector<T, 3> & operator[](int index);
 
     template<typename T1>
-    friend std::ostream & operator<<(std::ostream & ost, Rectangle &Rect);
-
+    friend std::ostream & operator<<(std::ostream & ost, Cuboid<T1> &cub);
+    T getSideLength(unsigned int index);
     void calculateSidesLength();
 };
 
@@ -46,33 +44,6 @@ Cuboid<T>::Cuboid() {
         this->vertices[i] = Vector<T, 3>();
     }
 }
-
-//template<typename T, unsigned int dimension>
-//void Cuboid<T, dimension>::sortVertices(Vector<T, dimension> *Vec){
-//    Vector sortedVertices[dimension] = ;
-//    //simple sort on vectors
-//    Vector smallest = Vec[0];
-//    int smallestIndex;
-//    for(int j = 0; j < dimension; j++) {
-//        for (int i = 0; i < dimension; i++) {
-//            if ((vertices[i].getX() + vertices[i].getY()) < (smallest.getX() + smallest.getY())) {
-//                smallest = vertices[i];
-//                smallestIndex = i;
-//            }
-//        }
-//        vertices[smallestIndex] = Vector(DBL_MAX/2, DBL_MAX/2);
-//        sortedVertices[j] = smallest;
-//        smallest = Vector(DBL_MAX/2, DBL_MAX/2);
-//    }
-//    //[0] -> Left down corner, [3] -> right up corner, [2][1] -> rest corners
-//    // [1 2]                        [3 2]
-//    // [4 3] <- rectangle final or  [4 1]
-//
-//    Vec1 = sortedVertices[1];
-//    Vec2 = sortedVertices[3];
-//    Vec3 = sortedVertices[2];
-//    Vec4 = sortedVertices[0];
-//}
 
 template<typename T>
 Cuboid<T>::Cuboid(Vector<T, 3> *ver){
@@ -113,7 +84,7 @@ bool operator==(const Cuboid<T> &cub1, const Cuboid<T> &cub2){
 }
 
 template<typename T>
-void Cuboid<T>::translationByVector(const Vector<T, 3> &Vec){
+void Cuboid<T>::translationByVector(Vector<T, 3> &Vec){
     this->vertices[0] = Vec + (this->vertices[0]);
     this->vertices[1] = Vec + (this->vertices[1]);
     this->vertices[2] = Vec + (this->vertices[2]);
@@ -188,37 +159,57 @@ Vector<T, 3> &Cuboid<T>::operator[](int index) {
 template<typename T>
 void Cuboid<T>::calculateSidesLength(){
 
-    //ver 01 -> len [0]; ver 12 -> len [1] ... itd ver 04 -> len[8]; ver 15 -> len[9] ... ver 37 -> len [11]
+    //sides 0 - 3 one group , 4-7 second group 8-11 last group
     Vector<T, 3> side = Vector<T, 3>();
-    for(int i = 0; i < VERTICES_NUMBER; i ++){
-        side = this->vertices[i+] - this->vertices[0];
-    }
+    side = this->vertices[0] - this->vertices[1];
+    this->sidesLength[0] = side.getLength();
+    side = this->vertices[2] - this->vertices[3];
+    this->sidesLength[1] = side.getLength();
+    side = this->vertices[4] - this->vertices[5];
+    this->sidesLength[2] = side.getLength();
+    side = this->vertices[6] - this->vertices[7];
+    this->sidesLength[3] = side.getLength();
 
-    this->sidesLength[0] =
-    std::pair<double, double> sides;
-    double tmp;
-    Vector side1 = ver4 - ver3;
-    Vector side2 = ver4 - ver1;
-    sides.first = side1.getLength();
-    sides.second = side2.getLength();
-    if(sides.first < sides.second){
-        tmp = sides.first;
-        sides.first = sides.second;
-        sides.second = tmp;
-    }
-    return sides;
+
+    side = this->vertices[0] - this->vertices[3];
+    this->sidesLength[4] = side.getLength();
+    side = this->vertices[1] - this->vertices[2];
+    this->sidesLength[5] = side.getLength();
+    side = this->vertices[4] - this->vertices[7];
+    this->sidesLength[6] = side.getLength();
+    side = this->vertices[5] - this->vertices[6];
+    this->sidesLength[7] = side.getLength();
+
+
+    side = this->vertices[0] - this->vertices[4];
+    this->sidesLength[8] = side.getLength();
+    side = this->vertices[1] - this->vertices[5];
+    this->sidesLength[9] = side.getLength();
+    side = this->vertices[2] - this->vertices[6];
+    this->sidesLength[10] = side.getLength();
+    side = this->vertices[3] - this->vertices[7];
+    this->sidesLength[11] = side.getLength();
 }
 
-//std::ostream & operator<<(std::ostream & ost, Cuboid &Rect){
-//    Vector Ver1 = Rect.vertices[0];
-//    Vector Ver2 = Rect.vertices[1];
-//    Vector Ver3 = Rect.vertices[2];
-//    Vector Ver4 = Rect.vertices[3];
-//    ost << Ver1 << Ver2 << Ver3 << Ver4;
-//    return ost;
-//}
-//
+template<typename T>
+std::ostream &operator<<(std::ostream &ost, Cuboid<T> &cub) {
+    ost << cub.vertices[0];
+    ost << cub.vertices[1];
+    ost << cub.vertices[2];
+    ost << cub.vertices[3];
+    ost << cub.vertices[4];
+    ost << cub.vertices[5];
+    ost << cub.vertices[6];
+    ost << cub.vertices[7];
+    ost << cub.vertices[0];
+    return ost;
+}
+
+template<typename T>
+T Cuboid<T>::getSideLength(unsigned int index) {
+    if(index > SIDES_NUMBER) throw std::invalid_argument("index out of range");
+    return this->sidesLength[index];
+}
 
 
-
-#endif //ROTATION2D_CUBOID_H
+#endif //ROTATION3D_CUBOID_H

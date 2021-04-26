@@ -206,6 +206,26 @@ TEST (Matrix, MultiplicationUnitByMatrixVector) {
     EXPECT_EQ(result, result2);
 }
 
+TEST (Matrix, MultiplicationMatrixByMatrix) {
+
+    Matrix<double, 3> B = Matrix<double, 3>();
+    B(0,0) = 1; B(0,1) = 1; B(0,2) = 0;
+    B(1,0) = 0; B(1,1) = 2; B(1,2) = 0;
+    B(2,0) = 1; B(2,1) = 0; B(2,2) = 3;
+
+    Matrix<double, 3> A = Matrix<double, 3>();
+    A(0,0) = 1; A(0,1) = 4; A(0,2) = 1;
+    A(1,0) = 2; A(1,1) = 5; A(1,2) = 0;
+    A(2,0) = 3; A(2,1) = 1; A(2,2) = 0;
+
+    Matrix<double, 3> C = Matrix<double, 3>();
+    C(0,0) = 2; C(0,1) = 9; C(0,2) = 3;
+    C(1,0) = 2; C(1,1) = 12; C(1,2) = 0;
+    C(2,0) = 3; C(2,1) = 5; C(2,2) = 0;
+
+    EXPECT_EQ(A*B, C);
+}
+
 
 TEST (Matrix, FailIndexing) {
 
@@ -215,162 +235,157 @@ TEST (Matrix, FailIndexing) {
 
     EXPECT_THROW(A(2,4), std::invalid_argument);
 }
-//
-//TEST (Cuboid, EmptyConstructor) {
-//
-//    Rectangle Adam = Cuboid();
-//    Rectangle Ewa = Cuboid();
-//
-//    Vector Vec0 = Vector();
-//    Vector Vec1 = Vector();
-//    Vector Vec2 = Vector();
-//    Vector Vec3 = Vector();
-//    Vector Vec4 = Vector();
-//    Ewa.setCuboid(Vec0, Vec1, Vec2, Vec3, Vec4);
-//
-//    EXPECT_EQ(Adam, Ewa);
-//}
-//
-//TEST (Cuboid, ConstructorWithVerticesInOrder) {
-//
-//    Vector Ver1 = Vector(1,3);
-//    Vector Ver2 = Vector(3,3);
-//    Vector Ver3 = Vector(3,1);
-//    Vector Ver4 = Vector(1,1);
-//
-//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
-//    Cuboid Ewa = Rectangle();
-//
-//    Vector center = Vector(2,2);
-//
-//    Ewa.setCuboid(center, Ver1, Ver2, Ver3, Ver4);
-//
-//    EXPECT_EQ(Adam, Ewa);
-//}
-//
-//TEST (Cuboid, ConstructorWithMixedUpVerticesInArguments) {
-//
-//    Vector Ver1 = Vector(1,3);
-//    Vector Ver2 = Vector(3,3);
-//    Vector Ver3 = Vector(3,1);
-//    Vector Ver4 = Vector(1,1);
-//
-//    Cuboid Adam = Rectangle(Ver2, Ver1, Ver4, Ver3);
-//    Rectangle Ewa = Cuboid();
-//
-//    Vector center = Vector(2,2);
-//
-//    Vector Vec1 = Vector(1,3);
-//    Vector Vec2 = Vector(3,3);
-//    Vector Vec3 = Vector(3,1);
-//    Vector Vec4 = Vector(1,1);
-//    Ewa.setCuboid(center, Vec1, Vec2, Vec3, Vec4);
-//
-//    EXPECT_EQ(Adam, Ewa);
-//}
-//
-//TEST (Cuboid, FailConstructor) {
-//
-//    Vector Ver1 = Vector(1,3);
-//    Vector Ver2 = Vector(3,3);
-//    Vector Ver3 = Vector(3,1);
-//    Vector Ver4 = Vector(1,1);
-//
-//    Cuboid Adam;
-//
-//    EXPECT_THROW(Adam = Cuboid(Ver1, Ver1, Ver4, Ver3), std::invalid_argument);
-//}
-//
-//TEST (Cuboid, TranslationByWector) {
-//
-//    Vector Ver1 = Vector(1,3);
-//    Vector Ver2 = Vector(3,3);
-//    Vector Ver3 = Vector(3,1);
-//    Vector Ver4 = Vector(1,1);
-//    Vector translation = Vector(1,1);
-//
-//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
-//    Rectangle Ewa = Cuboid();
-//    Adam.translationByVector(translation);
-//    Vector center = Vector(3,3);
-//    Vector Vec1 = Vector(2,4);
-//    Vector Vec2 = Vector(4,4);
-//    Vector Vec3 = Vector(4,2);
-//    Vector Vec4 = Vector(2,2);
-//
-//    Ewa.setCuboid(center, Vec1, Vec2, Vec3, Vec4);
-//
-//    EXPECT_EQ(Adam, Ewa);
-//}
-//
-//TEST (Cuboid, RotationByDegrees) {
-//
-//    Vector Ver1 = Vector(1, 3);
-//    Vector Ver2 = Vector(3, 3);
-//    Vector Ver3 = Vector(3, 1);
-//    Vector Ver4 = Vector(1, 1);
-//    Vector translation = Vector(1, 1);
-//
-//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
-//    Cuboid Ewa = Rectangle();
-//    Adam.rotationByDegrees(90);
-//
-//    Vector center = Vector(-2, 2);
-//    Vector Vec1 = Vector(-3, 1);
-//    Vector Vec2 = Vector(-3, 3);
-//    Vector Vec3 = Vector(-1, 3);
-//    Vector Vec4 = Vector(-1, 1);
-//
-//    Ewa.setCuboid(center, Vec1, Vec2, Vec3, Vec4);
-//
-//    EXPECT_EQ(Adam, Ewa);
-//}
-//
-//TEST (Cuboid, RectangleOstream) {
-//
-//    std::stringstream ost;
-//    Vector Ver1 = Vector(1, 3);
-//    Vector Ver2 = Vector(3, 3);
-//    Vector Ver3 = Vector(3, 1);
-//    Vector Ver4 = Vector(1, 1);
-//
-//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
-//    ost << Adam;
-//    /* rectangle in cout give 10 decimal point fixed precision */
-//    EXPECT_EQ("1 3\n3 3\n3 1\n1 1\n", ost.str());
-//}
-//
-//TEST (Cuboid, GetSidesLength) {
-//
-//    std::stringstream ost;
-//    Vector Ver1 = Vector(1, 3);
-//    Vector Ver2 = Vector(3, 3);
-//    Vector Ver3 = Vector(1, 1);
-//    Vector Ver4 = Vector(3, 1);
-//
-//    Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
-//    std::pair<double,double> sides = Adam.getSidesLength(Ver1, Ver2, Ver3, Ver4);
-//    double shorterSide = sides.first;
-//    double longerSide = sides.second;
-//
-//    EXPECT_EQ(shorterSide, 2);
-//    EXPECT_EQ(longerSide, 2);
-//}
-//
-//TEST (Cuboid, Indexing) {
-//
-//std::stringstream ost;
-//Vector Ver1 = Vector(1, 3);
-//Vector Ver2 = Vector(3, 3);
-//Vector Ver3 = Vector(1, 1);
-//Vector Ver4 = Vector(3, 1);
-//
-//Rectangle Adam = Cuboid(Ver1, Ver2, Ver3, Ver4);
-//
-//
-//EXPECT_EQ(Adam[0], Ver1);
-//EXPECT_EQ(Adam[1], Ver2);
-//EXPECT_EQ(Adam[2], Ver3);
-//EXPECT_EQ(Adam[3], Ver4);
-//
-//}
+
+TEST (Cuboid, EmptyConstructor) {
+
+    Cuboid<double> Adam = Cuboid<double>();
+    Cuboid<double> Ewa = Cuboid<double>();
+
+    Vector<double, 3> Vec = Vector<double, 3>();
+
+    for(int i = 0; i < VERTICES_NUMBER; i++){
+        Adam[i] = Vec;
+    }
+
+    EXPECT_EQ(Adam, Ewa);
+}
+
+TEST (Cuboid, ConstructorWithVerticesInOrder) {
+
+    Vector<double, 3> Ver0 = Vector<double, 3>(0,0,1);
+    Vector<double, 3> Ver1 = Vector<double, 3>(5,0,1);
+    Vector<double, 3> Ver2 = Vector<double, 3>(5,0,4);
+    Vector<double, 3> Ver3 = Vector<double, 3>(0,0,4);
+
+    Vector<double, 3> Ver4 = Vector<double, 3>(0,7,1);
+    Vector<double, 3> Ver5 = Vector<double, 3>(5,7,1);
+    Vector<double, 3> Ver6 = Vector<double, 3>(5,7,4);
+    Vector<double, 3> Ver7 = Vector<double, 3>(0,7,4);
+
+    Vector<double, 3> vertices[VERTICES_NUMBER] = {Ver0, Ver1, Ver2, Ver3, Ver4, Ver5, Ver6, Ver7};
+    Cuboid<double> Adam = Cuboid<double>(vertices);
+    Cuboid<double> Ewa = Cuboid<double>();
+
+    for(int i = 0; i < VERTICES_NUMBER; i++){
+        Ewa[i] = vertices[i];
+    }
+
+    EXPECT_EQ(Adam, Ewa);
+}
+
+
+TEST (Cuboid, TranslationByWector) {
+    Vector<double, 3> Ver0 = Vector<double, 3>(0,0,1);
+    Vector<double, 3> Ver1 = Vector<double, 3>(5,0,1);
+    Vector<double, 3> Ver2 = Vector<double, 3>(5,0,4);
+    Vector<double, 3> Ver3 = Vector<double, 3>(0,0,4);
+
+    Vector<double, 3> Ver4 = Vector<double, 3>(0,7,1);
+    Vector<double, 3> Ver5 = Vector<double, 3>(5,7,1);
+    Vector<double, 3> Ver6 = Vector<double, 3>(5,7,4);
+    Vector<double, 3> Ver7 = Vector<double, 3>(0,7,4);
+
+    Vector<double, 3> vertices[VERTICES_NUMBER] = {Ver0, Ver1, Ver2, Ver3, Ver4, Ver5, Ver6, Ver7};
+    Cuboid<double> Adam = Cuboid<double>(vertices);
+    Vector<double, 3> translation = Vector<double, 3>(1, 2, 3);
+
+    Adam.translationByVector(translation);
+    Cuboid<double> Ewa = Cuboid<double>();
+
+    for(int i = 0; i < VERTICES_NUMBER; i++){
+        Ewa[i] = (vertices[i] + translation);
+    }
+    EXPECT_EQ(Adam, Ewa);
+}
+
+TEST (Cuboid, RotationByDegrees) {
+
+    Vector<double, 3> Ver0 = Vector<double, 3>(0,0,1);
+    Vector<double, 3> Ver1 = Vector<double, 3>(5,0,1);
+    Vector<double, 3> Ver2 = Vector<double, 3>(5,0,4);
+    Vector<double, 3> Ver3 = Vector<double, 3>(0,0,4);
+
+    Vector<double, 3> Ver4 = Vector<double, 3>(0,7,1);
+    Vector<double, 3> Ver5 = Vector<double, 3>(5,7,1);
+    Vector<double, 3> Ver6 = Vector<double, 3>(5,7,4);
+    Vector<double, 3> Ver7 = Vector<double, 3>(0,7,4);
+
+    Vector<double, 3> vertices[VERTICES_NUMBER] = {Ver0, Ver1, Ver2, Ver3, Ver4, Ver5, Ver6, Ver7};
+    Cuboid<double> Adam = Cuboid<double>(vertices);
+    Matrix<double, 3> rotation = Matrix<double, 3>(360, 'z');
+    Adam.rotationByMatrix(rotation);
+
+    Cuboid<double> Ewa = Cuboid<double>();
+
+    for(int i = 0; i < VERTICES_NUMBER; i++){
+        Ewa[i] = (rotation * vertices[i]);
+    }
+
+    EXPECT_EQ(Adam, Ewa);
+}
+
+TEST (Cuboid, Ostream) {
+
+    std::stringstream ost;
+    Vector<double, 3> Ver0 = Vector<double, 3>(0,0,1);
+    Vector<double, 3> Ver1 = Vector<double, 3>(5,0,1);
+    Vector<double, 3> Ver2 = Vector<double, 3>(5,0,4);
+    Vector<double, 3> Ver3 = Vector<double, 3>(0,0,4);
+
+    Vector<double, 3> Ver4 = Vector<double, 3>(0,7,1);
+    Vector<double, 3> Ver5 = Vector<double, 3>(5,7,1);
+    Vector<double, 3> Ver6 = Vector<double, 3>(5,7,4);
+    Vector<double, 3> Ver7 = Vector<double, 3>(0,7,4);
+
+    Vector<double, 3> vertices[VERTICES_NUMBER] = {Ver0, Ver1, Ver2, Ver3, Ver4, Ver5, Ver6, Ver7};
+    Cuboid<double> Adam = Cuboid<double>(vertices);
+    ost << Adam;
+    /* cuboid in cout give 10 decimal point fixed precision */
+    EXPECT_EQ("0 0 1\n5 0 1\n5 0 4\n0 0 4\n0 7 1\n5 7 1\n5 7 4\n0 7 4\n0 0 1\n", ost.str());
+}
+
+TEST (Cuboid, GetSidesLength) {
+
+    Vector<double, 3> Ver0 = Vector<double, 3>(0,0,1);
+    Vector<double, 3> Ver1 = Vector<double, 3>(5,0,1);
+    Vector<double, 3> Ver2 = Vector<double, 3>(5,0,4);
+    Vector<double, 3> Ver3 = Vector<double, 3>(0,0,4);
+
+    Vector<double, 3> Ver4 = Vector<double, 3>(0,7,1);
+    Vector<double, 3> Ver5 = Vector<double, 3>(5,7,1);
+    Vector<double, 3> Ver6 = Vector<double, 3>(5,7,4);
+    Vector<double, 3> Ver7 = Vector<double, 3>(0,7,4);
+
+    Vector<double, 3> vertices[VERTICES_NUMBER] = {Ver0, Ver1, Ver2, Ver3, Ver4, Ver5, Ver6, Ver7};
+    Cuboid<double> Adam = Cuboid<double>(vertices);
+    Adam.calculateSidesLength();
+
+
+    EXPECT_NEAR(Adam.getSideLength(0) , Adam.getSideLength(2), 0.00000001);
+    EXPECT_NEAR(Adam.getSideLength(0) , 5.0 , 0.00000001);
+
+    EXPECT_NEAR(Adam.getSideLength(4) , Adam.getSideLength(5), 0.00000001);
+    EXPECT_NEAR(Adam.getSideLength(5) , 3.0, 0.00000001);
+    EXPECT_NEAR(Adam.getSideLength(10) , Adam.getSideLength(11), 0.00000001);
+    EXPECT_NEAR(Adam.getSideLength(10) , 7.0, 0.00000001);
+}
+
+TEST (Cuboid, Indexing) {
+
+    Vector<double, 3> Ver0 = Vector<double, 3>(0,0,1);
+    Vector<double, 3> Ver1 = Vector<double, 3>(5,0,1);
+    Vector<double, 3> Ver2 = Vector<double, 3>(5,0,4);
+    Vector<double, 3> Ver3 = Vector<double, 3>(0,0,4);
+
+    Vector<double, 3> Ver4 = Vector<double, 3>(0,7,1);
+    Vector<double, 3> Ver5 = Vector<double, 3>(5,7,1);
+    Vector<double, 3> Ver6 = Vector<double, 3>(5,7,4);
+    Vector<double, 3> Ver7 = Vector<double, 3>(0,7,4);
+
+    Vector<double, 3> vertices[VERTICES_NUMBER] = {Ver0, Ver1, Ver2, Ver3, Ver4, Ver5, Ver6, Ver7};
+    Cuboid<double> Adam = Cuboid<double>(vertices);
+    Vector<double, 3> result= Vector<double, 3>(1.2, 1.3, 1.4);
+    Adam[0] = result;
+
+EXPECT_EQ(Adam[0], result);
+}

@@ -1,6 +1,6 @@
 
-#ifndef ROTATION2D_MATRIX_H
-#define ROTATION2D_MATRIX_H
+#ifndef ROTATION3D_MATRIX_H
+#define ROTATION3D_MATRIX_H
 
 #include <ios>
 #include "Vector.h"
@@ -19,6 +19,9 @@ public:
 
     template<typename T1, unsigned int dimension1>
     friend Vector<T1,dimension1> operator*(const Matrix<T1, dimension1> &matrix, Vector<T1, dimension1> &vec);
+
+    template<typename T1, unsigned int dimension1>
+    friend Matrix<T1,dimension1> operator*(const Matrix<T1, dimension1> &matrix1, const Matrix<T1, dimension1> &matrix2);
 
     T &operator()(int row, int column);
     const T &operator()(int row, int column) const;
@@ -152,4 +155,18 @@ const T &Matrix<T, dimension>::operator()(int row, int column) const {
     return matrix[row][column];
 }
 
-#endif //ROTATION2D_MATRIX_H
+template<typename T, unsigned int dimension>
+Matrix<T, dimension> operator*(const Matrix<T, dimension> &matrix1, const Matrix<T, dimension> &matrix2) {
+    Matrix<T,3> result = Matrix<T,3>();
+    for(int i = 0; i < dimension; i++){
+        for(int j = 0; j < dimension; j++){
+            result(i,j) = 0;
+            for(int k = 0; k < dimension; k++){
+                result(i,j) += matrix1(i,k) * matrix2(k,j);
+            }
+        }
+    }
+    return result;
+}
+
+#endif //ROTATION3D_MATRIX_H

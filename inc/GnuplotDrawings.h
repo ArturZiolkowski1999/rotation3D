@@ -2,8 +2,8 @@
 // Created by artur on 4/11/21.
 //
 
-#ifndef ROTATION2D_GNUPLOTDRAWINGS_H
-#define ROTATION2D_GNUPLOTDRAWINGS_H
+#ifndef ROTATION3D_GNUPLOTDRAWINGS_H
+#define ROTATION3D_GNUPLOTDRAWINGS_H
 #include <unistd.h>
 #include "Cuboid.h"
 #include <lacze_do_gnuplota.hh>
@@ -25,4 +25,4 @@
 //    void animateTranslateRectangle(Cuboid &Rec, Vector &translation);
 //};
 
-#endif //ROTATION2D_GNUPLOTDRAWINGS_H
+#endif //ROTATION3D_GNUPLOTDRAWINGS_H
