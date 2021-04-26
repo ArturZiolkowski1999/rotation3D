@@ -15,14 +15,15 @@ private:
     PzG::LaczeDoGNUPlota GNU;
     double XRange[2];
     double YRange[2];
+    double ZRange[2];
 
 public:
     GnuplotDrawings();
-    GnuplotDrawings(std::string _fileName, double _XRange[2], double _YRange[2]);
-    void drawRectangle(Cuboid &Rec);
-    void drawVector(Vector &Vec);
-    void animateRotateRectangle(Cuboid &Rec, double &degree);
-    void animateTranslateRectangle(Cuboid &Rec, Vector &translation);
+    GnuplotDrawings(std::string _fileName, double _XRange[2], double _YRange[2], double _ZRange[2]);
+    void drawCuboid(Cuboid<double> &cub);
+    void drawVector(Vector<double, 3> &Vec);
+    void animateRotateRectangle(Cuboid<double> &Rec, double &degree, char axis);
+    void animateTranslateRectangle(Cuboid<double> &cub, Vector<double, 3> &translation);
 };
 
 #endif //ROTATION3D_GNUPLOTDRAWINGS_H
