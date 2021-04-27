@@ -52,11 +52,14 @@ int main(int argc, char** argv) {
                 break;
             case 'o':
                 getRotationMatrix(cub, rotMatrix, gnu);
+//                cub.rotationByMatrix(rotMatrix);
+//                gnu.drawCuboid(cub);
                 rotMatrix = Matrix();
                 break;
             case 'p':
                 std::cin >> translation;
                 gnu.animateTranslateRectangle(cub,translation);
+
                 break;
             case 'w':
                 std::cout << cub;
