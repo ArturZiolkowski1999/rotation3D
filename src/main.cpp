@@ -52,14 +52,13 @@ int main(int argc, char** argv) {
                 break;
             case 'o':
                 getRotationMatrix(cub, rotMatrix, gnu);
-//                cub.rotationByMatrix(rotMatrix);
-//                gnu.drawCuboid(cub);
+                cub.rotationByMatrix(rotMatrix);
+                gnu.drawCuboid(cub);
                 rotMatrix = Matrix();
                 break;
             case 'p':
                 std::cin >> translation;
                 gnu.animateTranslateRectangle(cub,translation);
-
                 break;
             case 'w':
                 std::cout << cub;
@@ -104,7 +103,10 @@ void menuDisplay(){
 
 void getRotationMatrix(Cuboid<double> &cub, Matrix &rotMatrix, GnuplotDrawings &gnu){
     char c;
-    Matrix rot;
+    bool fail = false;
+    Cuboid<double> animateCuboid = cub;
+    Matrix rot = Matrix ();
+    rotMatrix = Matrix();
     double degree;
     while(c != '.'){
         std::cout << "give axis ann angle in degree\n";
@@ -112,11 +114,28 @@ void getRotationMatrix(Cuboid<double> &cub, Matrix &rotMatrix, GnuplotDrawings &
             throw std::exception();
         }
         if(c == '.') break;
-        if(!(std::cin >> degree)){
-            throw std::exception();
+        switch (c) {
+            case'x':
+                fail = false;
+                break;
+            case'y':
+                fail = false;
+                break;
+            case'z':
+                fail = false;
+                break;
+            default:
+                std::cout <<"unknown axis, try again\n";
+                fail = true;
+                break;
         }
-        rot = Matrix(degree, c);
-        gnu.animateRotateCuboid(cub, degree, c);
-        rotMatrix = rotMatrix * rot;
+        if(!fail){
+            if(!(std::cin >> degree)){
+                throw std::exception();
+            }
+            rot = Matrix(degree, c);
+            gnu.animateRotateCuboid(animateCuboid, degree, c);
+            rotMatrix = rot * rotMatrix;
+        }
     }
 }

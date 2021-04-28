@@ -202,7 +202,6 @@ public:
         return result;
     }
 
-
     template<typename T, unsigned int dimension>
     T Vector<T, dimension>::getLength() {
         if (dimension < 3) {
