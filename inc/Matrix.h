@@ -28,6 +28,7 @@ public:
     void matrixDisplay();
 
     friend class Matrix3x3;
+    friend class Matrix4x4;
 };
 
 
