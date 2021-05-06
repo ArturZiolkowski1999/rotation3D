@@ -11,6 +11,7 @@ Matrix4x4::Matrix4x4(double jaw, double pitch, double roll, Vector<double, 3> ax
     pitch = degreeToRadians(pitch);
     roll = degreeToRadians(roll);
 
+
     this->matrix[0][0] = cos(jaw) * cos(pitch);
     this->matrix[0][1] = cos(jaw)*sin(pitch)*sin(roll) - sin(jaw) * cos(roll);
     this->matrix[0][2] = cos(jaw)*sin(pitch)*cos(roll) + sin(jaw) * sin(roll);

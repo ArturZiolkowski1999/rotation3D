@@ -8,7 +8,7 @@
 template <typename T, unsigned int dimension>
 class Matrix {
 private:
-    T matrix[MATRIX_DIM][MATRIX_DIM];
+    T matrix[dimension][dimension];
     double degreeToRadians(double degree);
 public:
     Matrix();

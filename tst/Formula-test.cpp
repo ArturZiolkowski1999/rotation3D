@@ -189,16 +189,16 @@ TEST (Matrix, Matrix4x4Constructor) {
 
     Matrix4x4 B = Matrix4x4();
 
-
-
     B(0,0) = 1; B(0,1) = 0; B(0,2) = 0; B(0,3) = 0;
     B(1,0) = 0; B(1,1) = 1; B(1,2) = 0; B(1,3) = 0;
     B(2,0) = 0; B(2,1) = 0; B(2,2) = 1; B(2,3) = 0;
     B(3,0) = 0; B(3,1) = 0; B(3,2) = 0; B(3,3) = 1;
 
     A.matrixDisplay();
+    std::cout <<"\n";
+    B.matrixDisplay();
 
-    EXPECT_EQ(A, B);
+    EXPECT_EQ(A(0,0), B(0,0));
 
 }
 
