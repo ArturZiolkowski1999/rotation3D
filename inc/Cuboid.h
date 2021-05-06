@@ -9,7 +9,7 @@
 #include <iostream>
 #include <utility>
 #include <float.h>
-#include "Matrix.h"
+#include "Matrix3x3.h"
 #include "Constants.h"
 #include "Vector.h"
 
@@ -26,7 +26,7 @@ public:
     template<typename T1>
     friend bool operator==(const Cuboid<T1> &cub1, const Cuboid<T1> &cub2);
     void translationByVector(Vector<T, 3> &Vec);
-    void rotationByMatrix(const Matrix<T, 3> &rotMatrix);
+    void rotationByMatrix(const Matrix3x3 &rotMatrix);
 
     const Vector<T, 3> & operator[](int index) const;
     Vector<T, 3> & operator[](int index);
@@ -96,7 +96,7 @@ void Cuboid<T>::translationByVector(Vector<T, 3> &Vec){
 }
 
 template<typename  T>
-void Cuboid<T>::rotationByMatrix(const Matrix<T, 3> &rotMatrix){
+void Cuboid<T>::rotationByMatrix(const Matrix3x3 &rotMatrix){
 
     this->vertices[0] = rotMatrix * (this->vertices[0]);
     this->vertices[1] = rotMatrix * (this->vertices[1]);

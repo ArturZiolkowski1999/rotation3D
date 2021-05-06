@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "Matrix.h"
+#include "Matrix3x3.h"
 #include <iostream>
 #include <utility>
 #include "Cuboid.h"
@@ -157,10 +157,10 @@ TEST (Matrix, EmptyConstructor) {
 
 TEST (Matrix, Constructor) {
 
-    Matrix<double, 3> A = Matrix<double, 3>(90, 'z');
+    Matrix<double, 3> A = Matrix3x3(90, 'z');
     Matrix<double, 3> B = Matrix<double, 3>();
 
-    Matrix C = Matrix<double, 3>(0, 'z');
+    Matrix C = Matrix3x3(0, 'z');
     Matrix D = Matrix<double, 3>();
 
     B(0,0) = cos(M_PI/2); B(0,1) = -sin(M_PI/2); B(0,2) = 0;
@@ -174,7 +174,7 @@ TEST (Matrix, Constructor) {
     EXPECT_EQ(A, B);
     EXPECT_EQ(C, D);
 
-    Matrix<double, 3> E = Matrix<double, 3>(90, 'x');
+    Matrix<double, 3> E = Matrix3x3(90, 'x');
     B(0,0) = 1; B(0,1) = 0; B(0,2) = 0;
     B(1,0) = 0; B(1,1) = cos(M_PI/2); B(1,2) = -sin(M_PI/2);
     B(2,0) = 0; B(2,1) = sin(M_PI/2); B(2,2) = cos(M_PI/2);
@@ -198,7 +198,7 @@ TEST (Matrix, MultiplicationMatrixVector) {
 
 TEST (Matrix, MultiplicationUnitByMatrixVector) {
 
-    Matrix<double, 3> A = Matrix<double, 3>(0, 'z');
+    Matrix<double, 3> A = Matrix3x3(0, 'z');
     Vector<double, 3> vec = Vector<double, 3>(1,2, 3);
     Vector<double, 3> result = Vector<double, 3>();
     result = A*vec;
@@ -312,7 +312,7 @@ TEST (Cuboid, RotationByDegrees) {
 
     Vector<double, 3> vertices[VERTICES_NUMBER] = {Ver0, Ver1, Ver2, Ver3, Ver4, Ver5, Ver6, Ver7};
     Cuboid<double> Adam = Cuboid<double>(vertices);
-    Matrix<double, 3> rotation = Matrix<double, 3>(360, 'z');
+    Matrix3x3 rotation = Matrix3x3(360, 'z');
     Adam.rotationByMatrix(rotation);
 
     Cuboid<double> Ewa = Cuboid<double>();

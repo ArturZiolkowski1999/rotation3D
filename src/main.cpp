@@ -2,15 +2,15 @@
 #include <fstream>
 #include <lacze_do_gnuplota.hh>
 #include <utility>
-#include "Matrix.h"
+#include "../inc/Matrix3x3.h"
 #include "Cuboid.h"
 #include "Vector.h"
 #include "GnuplotDrawings.h"
 #define Vector Vector<double, 3>
-#define Matrix Matrix<double, 3>
+
 
 void menuDisplay();
-void getRotationMatrix(Cuboid<double> &cub, Matrix &rotMatrix, GnuplotDrawings &gnu);
+void getRotationMatrix(Cuboid<double> &cub, Matrix3x3 &rotMatrix, GnuplotDrawings &gnu);
 
 int main(int argc, char** argv) {
     /* Initialize Cuboid and translation vector and axis*/
@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     Vector vertices[VERTICES_NUMBER] = {Ver0, Ver1, Ver2, Ver3, Ver4, Ver5, Ver6, Ver7};
     Cuboid<double> cub = Cuboid<double>(vertices);
     char axis;
-    Matrix rotMatrix = Matrix();
+    Matrix3x3 rotMatrix = Matrix3x3();
 
     Vector translation;
     /* Initialize "Lacze do gnuplota" to work with */
@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
                 getRotationMatrix(cub, rotMatrix, gnu);
                 cub.rotationByMatrix(rotMatrix);
                 gnu.drawCuboid(cub);
-                rotMatrix = Matrix();
+                rotMatrix = Matrix3x3();
                 break;
             case 'p':
                 std::cin >> translation;
@@ -101,12 +101,12 @@ void menuDisplay(){
   std::cout << "l - display length of sides\n";
 }
 
-void getRotationMatrix(Cuboid<double> &cub, Matrix &rotMatrix, GnuplotDrawings &gnu){
+void getRotationMatrix(Cuboid<double> &cub, Matrix3x3 &rotMatrix, GnuplotDrawings &gnu){
     char c;
     bool fail = false;
     Cuboid<double> animateCuboid = cub;
-    Matrix rot = Matrix ();
-    rotMatrix = Matrix();
+    Matrix rot = Matrix3x3 ();
+    rotMatrix = Matrix3x3();
     double degree;
     while(c != '.'){
         std::cout << "give axis ann angle in degree\n";
@@ -133,7 +133,7 @@ void getRotationMatrix(Cuboid<double> &cub, Matrix &rotMatrix, GnuplotDrawings &
             if(!(std::cin >> degree)){
                 throw std::exception();
             }
-            rot = Matrix(degree, c);
+            rot = Matrix3x3(degree, c);
             gnu.animateRotateCuboid(animateCuboid, degree, c);
             rotMatrix = rot * rotMatrix;
         }

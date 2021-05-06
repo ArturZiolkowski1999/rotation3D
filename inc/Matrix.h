@@ -12,7 +12,6 @@ private:
     double degreeToRadians(double degree);
 public:
     Matrix();
-    Matrix(double degree, char axis);
 
     template<typename T1, unsigned int dimension1>
     friend bool operator==(const Matrix<T1, dimension1> &matrix1, const Matrix<T1, dimension1> &matrix2);
@@ -25,6 +24,8 @@ public:
 
     T &operator()(int row, int column);
     const T &operator()(int row, int column) const;
+
+    friend class Matrix3x3;
 };
 
 
@@ -41,67 +42,6 @@ Matrix<T, dimension>::Matrix() {
     if(dimension > 2) this->matrix[2][2] = 1;
 }
 
-template <typename T, unsigned int dimension>
-Matrix<T, dimension>::Matrix(double degree, char axis) {
-    /* [cos(), -sin(), ...]
-     * [sin(),  cos(), ...]
-     * [..................] */
-
-    if(dimension < 2) throw std::invalid_argument("to little matrix dimension");
-    double radians = degreeToRadians(degree);
-    // fill 3x3 matrix or 2x2 matrix
-    switch (axis) {
-        case 'x':
-            this->matrix[0][0] = 1;
-            this->matrix[0][1] = 0;
-            if(dimension > 2) this->matrix[0][2] = 0;
-            this->matrix[1][0] = 0;
-            this->matrix[1][1] = cos(radians);
-            if(dimension > 2) this->matrix[1][2] = -sin(radians);
-            if(dimension > 2) this->matrix[2][0] = 0;
-            if(dimension > 2) this->matrix[2][1] = sin(radians);
-            if(dimension > 2) this->matrix[2][2] = cos(radians);
-            break;
-        case 'y':
-            this->matrix[0][0] = cos(radians);
-            this->matrix[0][1] = 0;
-            if(dimension > 2) this->matrix[0][2] = sin(radians);
-            this->matrix[1][0] = 0;
-            this->matrix[1][1] = 1;
-            if(dimension > 2) this->matrix[1][2] = 0;
-            if(dimension > 2) this->matrix[2][0] = -sin(radians);
-            if(dimension > 2) this->matrix[2][1] = 0;
-            if(dimension > 2) this->matrix[2][2] = cos(radians);
-            break;
-        case 'z':
-            this->matrix[0][0] = cos(radians);
-            this->matrix[0][1] = -sin(radians);
-            if(dimension > 2) this->matrix[0][2] = 0;
-            this->matrix[1][0] = sin(radians);
-            this->matrix[1][1] = cos(radians);
-            if(dimension > 2) this->matrix[1][2] = 0;
-            if(dimension > 2) this->matrix[2][0] = 0;
-            if(dimension > 2) this->matrix[2][1] = 0;
-            if(dimension > 2) this->matrix[2][2] = 1;
-            break;
-        default:
-            std::cout << "unknown axis, try again\n";
-            break;
-    }
-
-    // fill rest dimension with zeros
-    int i = 3;
-    int j = 3;
-    while(i<MATRIX_DIM){
-        while(j<MATRIX_DIM){
-            /*2x times assign because all left matrix symmetrically should be zeroed */
-            this->matrix[i][j] = 0;
-            this->matrix[j][i] = 0;
-            j++;
-        }
-        i++;
-    }
-}
 
 template <typename T, unsigned int dimension>
 double Matrix<T, dimension>::degreeToRadians(double degree){

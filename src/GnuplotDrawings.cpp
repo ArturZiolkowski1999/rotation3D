@@ -56,21 +56,21 @@ void GnuplotDrawings::drawVector(Vector<double, 3> &Vec){
 
 void GnuplotDrawings::animateRotateCuboid(Cuboid<double> &cub, double &degree, char &axis) {
     Cuboid<double> animateCub = cub;
-    Matrix<double, 3> rotMatrix = Matrix<double, 3>();
+    Matrix3x3 rotMatrix = Matrix3x3();
     double singleDegree = 0;
     while (std::abs(singleDegree) < std::abs(degree)){
         singleDegree += 2;
         if(degree >= 0){
-            rotMatrix = Matrix<double, 3>(2,axis);
+            rotMatrix = Matrix3x3(2,axis);
             animateCub.rotationByMatrix(rotMatrix);
         }else{
-            rotMatrix = Matrix<double, 3>(-2,axis);
+            rotMatrix = Matrix3x3(-2,axis);
             animateCub.rotationByMatrix(rotMatrix);
         }
         usleep(ANIMATION_SPEED);
         drawCuboid(animateCub);
     }
-    rotMatrix = Matrix<double, 3>(degree, axis);
+    rotMatrix = Matrix3x3(degree, axis);
     cub.rotationByMatrix(rotMatrix);
     drawCuboid(cub);
 }
