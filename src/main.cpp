@@ -51,10 +51,10 @@ int main(int argc, char** argv) {
                 menuDisplay();
                 break;
             case 'o':
+                rotMatrix = Matrix3x3();
                 getRotationMatrix(cub, rotMatrix, gnu);
                 cub.rotationByMatrix(rotMatrix);
                 gnu.drawCuboid(cub);
-                rotMatrix = Matrix3x3();
                 break;
             case 'p':
                 std::cin >> translation;
@@ -62,6 +62,9 @@ int main(int argc, char** argv) {
                 break;
             case 'w':
                 std::cout << cub;
+                break;
+            case 'r':
+                rotMatrix.matrixDisplay();
                 break;
             case 'k':
                 break;
@@ -99,6 +102,7 @@ void menuDisplay(){
   std::cout << "m - display menu\n";
   std::cout << "k - close\n";
   std::cout << "l - display length of sides\n";
+  std::cout << "r - display last rotational matrix\n";
 }
 
 void getRotationMatrix(Cuboid<double> &cub, Matrix3x3 &rotMatrix, GnuplotDrawings &gnu){

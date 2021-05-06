@@ -25,6 +25,8 @@ public:
     T &operator()(int row, int column);
     const T &operator()(int row, int column) const;
 
+    void matrixDisplay();
+
     friend class Matrix3x3;
 };
 
@@ -107,6 +109,18 @@ Matrix<T, dimension> operator*(const Matrix<T, dimension> &matrix1, const Matrix
         }
     }
     return result;
+}
+
+template<typename T, unsigned int dimension>
+void Matrix<T, dimension>::matrixDisplay() {
+    std::cout << std::fixed;
+    std::cout << std::setprecision(10);
+    for (int i = 0; i < dimension; ++i) {
+        for (int j = 0; j < dimension; ++j) {
+            std::cout << this->matrix[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
 }
 
 #endif //ROTATION3D_MATRIX_H
