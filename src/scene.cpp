@@ -1,9 +1,9 @@
 //
 // Created by artur on 4/11/21.
 //
-#include "GnuplotDrawings.h"
+#include "scene.h"
 
-GnuplotDrawings::GnuplotDrawings() {
+scene::scene() {
     GNU.ZmienTrybRys(PzG::TR_3D);
     this->fileName = "";
     this->XRange[0] = 0;
@@ -12,7 +12,7 @@ GnuplotDrawings::GnuplotDrawings() {
     this->YRange[1] = 0;
 }
 
-GnuplotDrawings::GnuplotDrawings(std::string _fileName, double _XRange[2], double _YRange[2], double _ZRange[2]) {
+scene::scene(std::string _fileName, double _XRange[2], double _YRange[2], double _ZRange[2]) {
     this->fileName = _fileName;
     this->XRange[0] = _XRange[0];
     this->XRange[1] = _XRange[1];
@@ -20,14 +20,20 @@ GnuplotDrawings::GnuplotDrawings(std::string _fileName, double _XRange[2], doubl
     this->YRange[1] = _YRange[1];
     this->ZRange[0] = _ZRange[0];
     this->ZRange[1] = _ZRange[1];
-    GNU.DodajNazwePliku(this->fileName.c_str());
+    GNU.UstawRotacjeXZ(60,30);
+    GNU.DodajNazwePliku(this->fileName.c_str())
+        .ZmienSposobRys(PzG::SR_Ciagly);
+    GNU.DodajNazwePliku(this->fileName.c_str())
+        .ZmienSposobRys(PzG::SR_Punktowy)
+        .ZmienSzerokosc(1)
+        .ZmienKolor(4);
     GNU.ZmienTrybRys(PzG::TR_3D);
     GNU.UstawZakresX((this->XRange[0]),(this->XRange[1]));
     GNU.UstawZakresY((this->YRange[0]),(this->YRange[1]));
     GNU.UstawZakresZ((this->ZRange[0]),(this->ZRange[1]));
 }
 
-void GnuplotDrawings::drawCuboid(Cuboid<double> &cub){
+void scene::drawCuboid(Cuboid<double> &cub){
     std::ofstream os;
     os.open(this->fileName);
     if(!os){
@@ -41,7 +47,7 @@ void GnuplotDrawings::drawCuboid(Cuboid<double> &cub){
 
 }
 
-void GnuplotDrawings::drawVector(Vector<double, 3> &Vec){
+void scene::drawVector(Vector<double, 3> &Vec){
     std::ofstream os;
     os.open(this->fileName);
     if(!os){
@@ -54,7 +60,7 @@ void GnuplotDrawings::drawVector(Vector<double, 3> &Vec){
     os.close();
 }
 
-void GnuplotDrawings::animateRotateCuboid(Cuboid<double> &cub, double &degree, char &axis) {
+void scene::animateRotateCuboid(Cuboid<double> &cub, double &degree, char &axis) {
     Cuboid<double> animateCub = cub;
     Matrix3x3 rotMatrix = Matrix3x3();
     double singleDegree = 0;
@@ -75,7 +81,7 @@ void GnuplotDrawings::animateRotateCuboid(Cuboid<double> &cub, double &degree, c
     drawCuboid(cub);
 }
 
-void GnuplotDrawings::animateTranslateRectangle(Cuboid<double> &cub, Vector<double, 3> &translation) {
+void scene::animateTranslateRectangle(Cuboid<double> &cub, Vector<double, 3> &translation) {
     Cuboid<double> animateCub = cub;
     Vector<double, 3> animateTranslation = translation/translation.getLength();
     Vector<double, 3> unityTranslation = translation/translation.getLength();

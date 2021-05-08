@@ -5,12 +5,12 @@
 #include "../inc/Matrix3x3.h"
 #include "Cuboid.h"
 #include "Vector.h"
-#include "GnuplotDrawings.h"
+#include "scene.h"
 #define Vector Vector<double, 3>
 
 
 void menuDisplay();
-void getRotationMatrix(Cuboid<double> &cub, Matrix3x3 &rotMatrix, GnuplotDrawings &gnu);
+void getRotationMatrix(Cuboid<double> &cub, Matrix3x3 &rotMatrix, scene &gnu);
 
 int main(int argc, char** argv) {
     /* Initialize Cuboid and translation vector and axis*/
@@ -35,10 +35,11 @@ int main(int argc, char** argv) {
     double XRange[2] = {-15, 15};
     double YRange[2] = {-15, 15};
     double ZRange[2] = {-15, 15};
-    GnuplotDrawings gnu = GnuplotDrawings(file, XRange, YRange, ZRange);
+    scene gnu = scene(file, XRange, YRange, ZRange);
     /* Drawing initial rectangle and display menu*/
     menuDisplay();
 
+    Matrix3x3 matrixGetForSingleRotation = Matrix3x3();
     double degree, amountOfRotation;
     char c = ' ';
     while(c != 'k'){
@@ -53,6 +54,15 @@ int main(int argc, char** argv) {
             case 'o':
                 rotMatrix = Matrix3x3();
                 getRotationMatrix(cub, rotMatrix, gnu);
+                std::cout << "give amount of rotation (it has to be positive integer) \n";
+                if(amountOfRotation <= 0){
+                    throw std::invalid_argument("Incorrect amount of rotation");
+                }
+                std::cin >> amountOfRotation;
+                matrixGetForSingleRotation = rotMatrix;
+                for(int k = 1; k < amountOfRotation; k++){
+                    rotMatrix = matrixGetForSingleRotation * rotMatrix;
+                }
                 cub.rotationByMatrix(rotMatrix);
                 gnu.drawCuboid(cub);
                 break;
@@ -64,7 +74,7 @@ int main(int argc, char** argv) {
                 std::cout << cub;
                 break;
             case 'r':
-                rotMatrix.matrixDisplay();
+                std::cout << rotMatrix;
                 break;
             case 'k':
                 break;
@@ -105,7 +115,7 @@ void menuDisplay(){
   std::cout << "r - display last rotational matrix\n";
 }
 
-void getRotationMatrix(Cuboid<double> &cub, Matrix3x3 &rotMatrix, GnuplotDrawings &gnu){
+void getRotationMatrix(Cuboid<double> &cub, Matrix3x3 &rotMatrix, scene &gnu){
     char c;
     bool fail = false;
     Cuboid<double> animateCuboid = cub;

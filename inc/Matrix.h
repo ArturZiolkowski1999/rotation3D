@@ -26,6 +26,8 @@ public:
     const T &operator()(int row, int column) const;
 
     void matrixDisplay();
+    template<typename T1, unsigned int dimension1>
+    friend std::ostream & operator<<(std::ostream & ost, Matrix<T1, dimension1> &matrix);
 
     friend class Matrix3x3;
     friend class Matrix4x4;
@@ -123,5 +125,19 @@ void Matrix<T, dimension>::matrixDisplay() {
         std::cout << std::endl;
     }
 }
+
+template<typename T, unsigned int dimension>
+std::ostream &operator<<(std::ostream &ost, Matrix<T, dimension> &matrix1) {
+    std::cout << std::fixed;
+    std::cout << std::setprecision(10);
+    for (int i = 0; i < dimension; ++i) {
+        for (int j = 0; j < dimension; ++j) {
+            std::cout << matrix1.matrix[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    return ost;
+}
+
 
 #endif //ROTATION3D_MATRIX_H
